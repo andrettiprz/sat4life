@@ -1,0 +1,87 @@
+// Demo data – se reemplaza con datos reales de Supabase
+const samplePasses = [
+  {
+    id: 1,
+    satellite: "METEOR M2-3",
+    timestamp: "2026-03-03T14:25:00Z",
+    folder_name: "2026-03-03_14-25-00-METEOR-M2-3",
+    pngCount: 24,
+    rawCount: 12,
+    filledCount: 12,
+    status: "completed",
+    images: [
+      { id: 101, type: "FILLED", label: "MCIR Map", image_url: "/samples/meteor_filled.png" },
+      { id: 102, type: "RAW", label: "MSU-MR Canal 2", image_url: "/samples/meteor_raw.png" },
+      { id: 103, type: "RAW_MCIR", label: "MCIR Corregido", image_url: "/samples/meteor_mcir.png" },
+    ],
+  },
+  {
+    id: 2,
+    satellite: "METEOR M2-4",
+    timestamp: "2026-03-03T11:10:00Z",
+    folder_name: "2026-03-03_11-10-00-METEOR-M2-4",
+    pngCount: 18,
+    rawCount: 18,
+    filledCount: 0,
+    status: "completed",
+    images: [
+      { id: 201, type: "RAW", label: "MSU-MR Canal 2", image_url: "/samples/meteor_raw.png" },
+    ],
+  },
+  {
+    id: 3,
+    satellite: "METEOR M2-X",
+    timestamp: "2026-03-02T22:45:00Z",
+    folder_name: "2026-03-02_22-45-00-METEOR-M2-X",
+    pngCount: 30,
+    rawCount: 15,
+    filledCount: 15,
+    status: "completed",
+    images: [
+      { id: 301, type: "FILLED", label: "MCIR Map", image_url: "/samples/meteor_filled.png" },
+      { id: 302, type: "RAW_MCIR", label: "MCIR Corregido", image_url: "/samples/meteor_mcir.png" },
+    ],
+  },
+  {
+    id: 4,
+    satellite: "METEOR M2-3",
+    timestamp: "2026-03-02T18:20:00Z",
+    folder_name: "2026-03-02_18-20-00-METEOR-M2-3",
+    pngCount: 22,
+    rawCount: 11,
+    filledCount: 11,
+    status: "completed",
+    images: [
+      { id: 401, type: "FILLED", label: "MCIR Map", image_url: "/samples/meteor_filled.png" },
+      { id: 402, type: "RAW", label: "MSU-MR Canal 2", image_url: "/samples/meteor_raw.png" },
+    ],
+  },
+  {
+    id: 5,
+    satellite: "METEOR M2-4",
+    timestamp: "2026-03-02T09:30:00Z",
+    folder_name: "2026-03-02_09-30-00-METEOR-M2-4",
+    pngCount: 0,
+    rawCount: 0,
+    filledCount: 0,
+    status: "no_image",
+    images: [],
+  },
+  {
+    id: 6,
+    satellite: "METEOR M2-X",
+    timestamp: "2026-03-01T20:15:00Z",
+    folder_name: "2026-03-01_20-15-00-METEOR-M2-X",
+    pngCount: 28,
+    rawCount: 14,
+    filledCount: 14,
+    status: "completed",
+    images: [
+      { id: 601, type: "RAW_MCIR", label: "MCIR Corregido", image_url: "/samples/meteor_mcir.png" },
+      { id: 602, type: "RAW", label: "MSU-MR Canal 2", image_url: "/samples/meteor_raw.png" },
+      { id: 603, type: "FILLED", label: "MCIR Map", image_url: "/samples/meteor_filled.png" },
+    ],
+  },
+];
+
+export default samplePasses;
