@@ -98,7 +98,6 @@ function getLabelForType(type) {
     switch (type) {
         case 'FILLED': return 'MCIR Map'
         case 'RAW': return 'MSU-MR Canal 2'
-        case 'RAW_MCIR': return 'MCIR Corregido'
         case 'STANDARD': return 'Estándar'
         default: return type
     }
