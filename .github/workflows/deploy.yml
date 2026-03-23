@@ -1,0 +1,60 @@
+name: Deploy via Docker SSH
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Checkout Source Code
+      uses: actions/checkout@v4
+
+    # 1. Copiamos el código fuente de GitHub al servidor remoto
+    - name: Copy files via SCP
+      uses: appleboy/scp-action@v0.1.7
+      with:
+        host: ${{ secrets.SERVER_HOST }}
+        username: ${{ secrets.SERVER_USER }}
+        key: ${{ secrets.SERVER_SSH_KEY }}
+        port: 22
+        source: "./"
+        target: "/opt/sat4life"
+
+    # 2. Nos conectamos por SSH para construir y correr Docker
+    - name: Build and Deploy Docker Container
+      uses: appleboy/ssh-action@v1.0.3
+      env:
+        SUPABASE_URL: ${{ secrets.VITE_SUPABASE_URL }}
+        SUPABASE_KEY: ${{ secrets.VITE_SUPABASE_ANON_KEY }}
+      with:
+        host: ${{ secrets.SERVER_HOST }}
+        username: ${{ secrets.SERVER_USER }}
+        key: ${{ secrets.SERVER_SSH_KEY }}
+        port: 22
+        envs: SUPABASE_URL,SUPABASE_KEY
+        script: |
+          # Navegamos a la carpeta copiada
+          cd /opt/sat4life
+          
+          # Construimos la imagen inyectando variables de entorno
+          docker build \
+            --build-arg VITE_SUPABASE_URL=$SUPABASE_URL \
+            --build-arg VITE_SUPABASE_ANON_KEY=$SUPABASE_KEY \
+            -t sat4life-web .
+          
+          # Detenemos y borramos el contenedor viejo (si existe)
+          docker stop sat4life-app || true
+          docker rm sat4life-app || true
+          
+          # Levantamos el contenedor nuevo mapeando el puerto 8080 externo al 80 interno
+          docker run -d \
+            --name sat4life-app \
+            -p 8080:80 \
+            --restart unless-stopped \
+            sat4life-web
+          
+          # Limpiamos imagenes huerfanas viejas para no llenar el disco del servidor
+          docker image prune -f
