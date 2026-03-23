@@ -49,10 +49,10 @@ jobs:
           docker stop sat4life-app || true
           docker rm sat4life-app || true
           
-          # Levantamos el contenedor nuevo mapeando el puerto 8080 externo al 80 interno
+          # Levantamos el contenedor nuevo mapeando el puerto 5642 externo al 80 interno
           docker run -d \
             --name sat4life-app \
-            -p 8080:80 \
+            -p 5642:80 \
             --restart unless-stopped \
             sat4life-web
           
